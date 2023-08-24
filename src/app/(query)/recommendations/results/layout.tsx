@@ -5,5 +5,5 @@ export default function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-    return <section className="pt-20">{children}</section>
+    return <section className="py-20">{children}</section>
 }

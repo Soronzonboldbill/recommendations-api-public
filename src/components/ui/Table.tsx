@@ -18,11 +18,11 @@ const columnsDraft: GridColDef[] = [
     {
         field: "col1",
         headerName: "API key used",
-        width: 400,
+        width: 250,
         renderHeader(params) {
             return (
                 <strong className="font-semibold">
-                    {params.colDef.headerName} 🔑
+                    {params.colDef.headerName} 
                 </strong>
             )
         },

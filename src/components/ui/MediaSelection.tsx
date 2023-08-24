@@ -8,10 +8,13 @@ import makeAnimated from "react-select/animated"
 const animatedComponents = makeAnimated()
 
 const options = [
-    { label: "Song", value: "song" },
-    { label: "Artist", value: "artist" },
     { label: "Album", value: "album" },
-    { label: "Audio Book", value: "audio-book" },
+    { label: "Artist", value: "artist" },
+    { label: "Playlist", value: "playlist" },
+    { label: "Song", value: "track" },
+    { label: "Show", value: "show" },
+    { label: "Episode", value: "episode" },
+    { label: "Audio Book", value: "audiobook" },
 ]
 
 interface MediaSelectionProps {
@@ -32,7 +35,6 @@ const MediaSelection: FC<MediaSelectionProps> = ({ results }) => {
             Media Selection
             <Select
                 id="media-select"
-                required
                 inputId="media-select-input"
                 components={animatedComponents}
                 styles={colorStyles}

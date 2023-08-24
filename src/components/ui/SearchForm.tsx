@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, FormEventHandler, forwardRef, useState } from "react"
+import { FC, FormEventHandler, useState } from "react"
 import { Input } from "@/ui/Input"
 import { Button, buttonVariants } from "@/ui/Button"
 import { cn } from "@/lib/utils"
@@ -8,40 +8,65 @@ import MediaSelection from "@/ui/MediaSelection"
 import GenreMultiSelect from "@/ui/GenreMultiSelect"
 import Slider from "@/ui/Slider"
 import axios from "axios"
+import { toast } from "@/ui/toast"
 
 export interface SearchFormProps
     extends React.FormHTMLAttributes<HTMLFormElement> {
     inputList: any[]
-    fixed: boolean
 }
 
 const SearchForm: FC<SearchFormProps> = ({
     className,
     inputList,
-    fixed,
 }: SearchFormProps) => {
     const [genreResults, setGenreResults] = useState([]) // used to get information from GenreMultiSelect components
-    let sliderVals = [] as { label: string, value: number }[]
 
-    const handleSubmit: FormEventHandler = async (e: any) => { // submits the form to backend
+    const handleSubmit: FormEventHandler = async (e: any) => {
+        // submits the form to backend
         e.preventDefault()
-        const genreList = genreResults 
+        const searchTerm = e.target[1].value
 
-        for (let i = 1; i < inputList.length; i++) {
-            sliderVals.push({label: inputList[i].id, value: e.target[i].value })
+        // error validation
+        if (genreResults.length === 0) {
+            toast({
+                title: "Error Submitting Form",
+                message: "Please Select At Least One Media Type",
+                type: "error",
+            })
+
+            return
         }
 
-        // todo: update this later in production 
-        const url = "http://localhost:3000/api/v1/querySpotify"
+        if (!searchTerm) {
+            toast({
+                title: "Error Submitting Form",
+                message: "Please Input A Search Criteria",
+                type: "error",
+            })
+
+            return
+        }
 
         try {
+            const url = "http://localhost:3000/api/v1/searchSpotify"
             const results = await axios.post(url, {
-                genreList: genreList, 
-                sliders: sliderVals
+                mediaList: genreResults,
+                searchTerm: searchTerm,
             })
-            console.log(results.data);
+
+            toast({
+                title: "Success",
+                message: "Taking You To Your Results",
+                type: "default",
+            })
+
+            console.log(results)
         } catch (error) {
-            console.log(error)
+            toast({
+                title: "Something Went Wrong",
+                message: "Please Try Again Later",
+                type: "error",
+            })
         }
     }
 
@@ -54,8 +79,7 @@ const SearchForm: FC<SearchFormProps> = ({
             onSubmit={(e: any) => handleSubmit(e)}
             id="recommendations-form"
         >
-            {/* todo: refactor this code into a react select */}
-            {fixed ? <MediaSelection results={setGenreResults} /> : null}
+            <MediaSelection results={setGenreResults} />
             {inputList.map((item, index) => {
                 if (item.type === "text") {
                     return (

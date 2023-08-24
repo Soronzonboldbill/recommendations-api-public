@@ -3,6 +3,7 @@ import LargeHeading from "@/ui/LargeHeading"
 import Paragraph from "@/ui/Paragraph"
 import { Metadata } from "next"
 import { inputSchema } from "@/types/input-types"
+
 export const metadata: Metadata = {
     title: "Music Finder | Search",
     description: "Free & Open Source Music Finder Using Spotify API",
@@ -28,7 +29,7 @@ const page = ({}) => {
                 <Paragraph>
                     Search For Your Favorite Songs And Find Out More About Them
                 </Paragraph>
-                <SearchForm inputList={inputArr} fixed={true}></SearchForm>
+                <SearchForm inputList={inputArr}></SearchForm>
             </div>
         </div>
     )
