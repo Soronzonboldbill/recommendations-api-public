@@ -70,6 +70,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const spotifyToken = await getAuth()
         const results = await querySpotify(spotifyToken, genreList, sliderList)
 
+        // documenting this query into the database
+
         return res
             .status(validResponse)
             .json({ spotifyToken: spotifyToken, queryResults: results })

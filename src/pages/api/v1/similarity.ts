@@ -1,4 +1,3 @@
-import { cosineSimilarity } from '@/helpers/cosine-sim'
 import { withMethods } from '@/lib/api-middlewares/with-methods'
 import { db } from '@/lib/db'
 import { openai } from '@/lib/openai'
@@ -45,7 +44,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       })
     )
 
-    const similarity = cosineSimilarity(embeddings[0], embeddings[1])
+    // const similarity = cosineSimilarity(embeddings[0], embeddings[1])
 
     const duration = new Date().getTime() - start.getTime()
 
@@ -61,7 +60,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     })
 
-    return res.status(200).json({ success: true, text1, text2, similarity })
+    return res.status(200).json({ success: true, text1, text2, result: "similarity" })
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).json({ error: error.issues })
