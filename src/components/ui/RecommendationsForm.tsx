@@ -15,6 +15,8 @@ interface RecommendationsFormProps {
 }
 
 const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
+    // todo: implement a custom auth key for this form 
+    
     const [genreResults, setGenreResults] = useState([]) // used to get information from GenreMultiSelect components
     const sliderVals = [] as { label: string; value: number }[]
     const { push } = useRouter()
@@ -63,7 +65,6 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
                 message: "Taking You To Your Results",
                 type: "default",
             })
-            // console.log(results.data)
             sliderVals.length = 0
             window.name = JSON.stringify(results.data)
             push("/recommendations/results")

@@ -16,7 +16,7 @@ const Navbar = async () => {
                 <Link href="/" className={buttonVariants({ variant: "link" })}>
                     <div className="flex flex-row gap-2 items-center">
                         <SpotifyLogo height="2rem" width="2rem" />
-                        Music Finder
+                        Recommendations API
                     </div>
                 </Link>
 
@@ -26,17 +26,11 @@ const Navbar = async () => {
 
                 <div className="hidden md:flex gap-4">
                     <ThemeToggle />
-                    {/* <Link
+                    <Link
                         href="/documentation"
                         className={buttonVariants({ variant: "ghost" })}
                     >
                         Documentation
-                    </Link> */}
-                    <Link
-                        href="/search"
-                        className={buttonVariants({ variant: "ghost" })}
-                    >
-                        Search
                     </Link>
                     <Link
                         href="/recommendations"

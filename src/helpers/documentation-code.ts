@@ -2,16 +2,19 @@ export const nodejs = `const axios = require("axios");
 
 const options = {
     method: 'POST',
-    url: 'https://similarityapi.com/api/v1/similarity',
+    url: 'http://localhost:3000/api/v1/querySpotify',
     data: {
-      text1: 'First text',
-      text2: 'Second text'
-    },
+         // max 5 genres
+        genreList: ["hip-hop"],
+        
+        // value is between 0 and 1 inclusive and label is lowercase
+        sliders: [{ label: "energy", value: 0.5 }], 
+    }, 
     headers: {
-      'Authorization': 'YOUR_API_KEY',
+        'Authorization': 'YOUR API KEY',
     }
-  };
-  
+};
+
 axios.request(options).then(function (response) {
     console.log(response.data);
 }).catch(function (error) {

@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { withMethods } from "@/lib/api-middlewares/with-methods"
 import axios from "axios"
-import qs from "qs"
 import getAuth from "./connectSpotify"
+import { db } from "@/lib/db"
 
 const validResponse = 200
 const internalError = 500
@@ -42,11 +42,34 @@ const querySpotify = async (
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const genreList = req.body.genreList
     const sliderList = req.body.sliders
+    const apiKey = req.headers.authorization
+
+    if (!apiKey) {
+        return res.status(401).json({ error: "Unauthorized" })
+    }
+
+    if (genreList.length === 0 || genreList.length > 5) {
+        return res
+            .status(400)
+            .json({ error: "Either Genrelist is empty or exceeds 5 items" })
+    }
 
     try {
+        // validates api key
+        const validApiKey = await db.apiKey.findFirst({
+            where: {
+                key: apiKey,
+                enabled: true,
+            },
+        })
+
+        if (!validApiKey) {
+            return res.status(401).json({ error: "Unauthorized" })
+        }
+
         const spotifyToken = await getAuth()
         const results = await querySpotify(spotifyToken, genreList, sliderList)
-        console.log(results)
+
         return res
             .status(validResponse)
             .json({ spotifyToken: spotifyToken, queryResults: results })
