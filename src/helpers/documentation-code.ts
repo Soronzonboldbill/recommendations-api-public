@@ -5,14 +5,12 @@ const options = {
     url: 'http://localhost:3000/api/v1/querySpotify',
     data: {
          // max 5 genres
-        genreList: ["hip-hop"],
+        genreList: ["hip-hop",],
         
         // value is between 0 and 1 inclusive and label is lowercase
         sliders: [{ label: "energy", value: 0.5 }], 
+        Authorization: 'YOUR API KEY',
     }, 
-    headers: {
-        'Authorization': 'YOUR API KEY',
-    }
 };
 
 axios.request(options).then(function (response) {

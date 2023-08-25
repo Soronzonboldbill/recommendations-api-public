@@ -1,11 +1,12 @@
 import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
 import Link from "next/link"
-import { ThemeToggle } from "./ThemeToggle"
-import { buttonVariants } from "./ui/Button"
-import SignInButton from "./ui/SignInButton"
-import SignOutButton from "./ui/SignOutButton"
-import SpotifyLogo from "./ui/SpotifyLogo"
+import { ThemeToggle } from "@/components/ThemeToggle"
+import { Button, buttonVariants } from "@/ui/Button"
+import SignInButton from "@/ui/SignInButton"
+import SignOutButton from "@/ui/SignOutButton"
+import SpotifyLogo from "@/ui/SpotifyLogo"
+import SidebarNav from "@/ui/SidebarNav"
 
 const Navbar = async () => {
     const session = await getServerSession(authOptions)
@@ -20,8 +21,9 @@ const Navbar = async () => {
                     </div>
                 </Link>
 
-                <div className="md:hidden">
+                <div className="md:hidden flex gap-6">
                     <ThemeToggle />
+                    <SidebarNav />
                 </div>
 
                 <div className="hidden md:flex gap-4">

@@ -42,10 +42,12 @@ const querySpotify = async (
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const genreList = req.body.genreList
     const sliderList = req.body.sliders
-    const apiKey = req.headers.authorization
+    const apiKey = req.body.Authorization
+
+    console.log()
 
     if (!apiKey) {
-        return res.status(401).json({ error: "Unauthorized" })
+        return res.status(401).json({ error: "No API KEY" })
     }
 
     if (genreList.length === 0 || genreList.length > 5) {
@@ -67,11 +69,25 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(401).json({ error: "Unauthorized" })
         }
 
+        const start = new Date()
+
         const spotifyToken = await getAuth()
         const results = await querySpotify(spotifyToken, genreList, sliderList)
 
-        // documenting this query into the database
+        const duration = new Date().getTime() - start.getTime()
 
+        // documenting this query into the database
+        await db.apiRequest.create({
+            data: {
+                duration, 
+                method: req.method as string, 
+                path: req.url as string, 
+                status: 200, 
+                apiKeyId: validApiKey.id, 
+                usedApiKey: validApiKey.key 
+            }
+        })
+        
         return res
             .status(validResponse)
             .json({ spotifyToken: spotifyToken, queryResults: results })

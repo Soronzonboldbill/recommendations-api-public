@@ -9,17 +9,17 @@ import GenreMultiSelect from "./GenreMultiSelect"
 import Slider from "@/ui/Slider"
 import { toast } from "@/ui/toast"
 import { useRouter } from "next/navigation"
+import { db } from "@/lib/db"
 
 interface RecommendationsFormProps {
     inputList: any[]
 }
 
 const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
-    // todo: implement a custom auth key for this form 
-    
     const [genreResults, setGenreResults] = useState([]) // used to get information from GenreMultiSelect components
     const sliderVals = [] as { label: string; value: number }[]
     const { push } = useRouter()
+    const [submittingForm, setSubmittingForm] = useState<boolean>(false)
 
     const handleSubmit: FormEventHandler = async (e: any) => {
         e.preventDefault()
@@ -52,14 +52,22 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
             return
         }
 
+        setSubmittingForm(!submittingForm)
+
         // todo: update this later in production
         const url = "http://localhost:3000/api/v1/querySpotify"
 
         try {
+            const apiKey = await axios.request({
+                url: "http://localhost:3000/api/v1/getRecommendationAuth",
+            })
+
             const results = await axios.post(url, {
                 genreList: genreResults,
                 sliders: sliderVals,
+                Authorization: apiKey.data.apiKey,
             })
+
             toast({
                 title: "Success",
                 message: "Taking You To Your Results",
@@ -74,7 +82,7 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
                 message: "Please Try Again Later.",
                 type: "error",
             })
-            console.log(error)
+            console.log((error as Error).message)
             sliderVals.length = 0
         }
     }
@@ -128,7 +136,8 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
                 }
             })}
             <Button
-                className={cn(buttonVariants({ variant: "outline" }), "w-20")}
+                className={cn(buttonVariants({ variant: "outline" }), "")}
+                isLoading={submittingForm}
             >
                 Submit
             </Button>

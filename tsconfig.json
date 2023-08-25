@@ -33,6 +33,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "C:\\Users\\Josch\\Desktop\\similarity-api\\.next/types/**/*.ts"
-  ],
+, "makeCustomKey.mjs"  ],
   "exclude": ["node_modules"]
 }

@@ -28,7 +28,7 @@ const columnsTemplate: GridColDef[] = [
     {
         field: "col3",
         headerName: "Album Name",
-        width: 350,
+        width: 250,
     },
     {
         field: "col4",
@@ -36,14 +36,16 @@ const columnsTemplate: GridColDef[] = [
         width: 150,
         renderCell(params) {
             return (
-                <Button
-                    className={cn(
-                        buttonVariants({ variant: "subtle" }),
-                        "dark:text-slate-400"
-                    )}
-                >
-                    <a href={params.row.col4}>Spotify Link</a>{" "}
-                </Button>
+                <a href={params.row.col4}>
+                    <Button
+                        className={cn(
+                            buttonVariants({ variant: "subtle" }),
+                            "dark:text-slate-400"
+                        )}
+                    >
+                        Spotify Link
+                    </Button>
+                </a>
             )
         },
         cellClassName: "hover:outline-none",
@@ -118,34 +120,34 @@ const TrackResults: FC<TrackResultsProps> = ({}) => {
 
     return (
         <ThemeProvider theme={darkTheme}>
-            <div className="">
-                <DataGrid
-                    style={{
-                        backgroundColor:
-                            applicationTheme === "light" ? "white" : "#152238",
-                        fontSize: "1rem",
-                    }}
-                    sx={{
-                        "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-                            outline: "none !important",
+            <DataGrid
+                style={{
+                    backgroundColor:
+                        applicationTheme === "light" ? "white" : "#152238",
+                    fontSize: "1rem",
+                    width: "100%",
+                }}
+                sx={{
+                    "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                        outline: "none !important",
+                    },
+                    overflowX: "auto",
+                }}
+                pageSizeOptions={[5, 10]}
+                disableRowSelectionOnClick
+                autoHeight
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: 5,
                         },
-                    }}
-                    pageSizeOptions={[5, 10]}
-                    disableRowSelectionOnClick
-                    autoHeight
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 5,
-                            },
-                        },
-                    }}
-                    columns={columns}
-                    rows={rows}
-                    rowHeight={125}
-                    onPaginationModelChange={handlePageChange}
-                />
-            </div>
+                    },
+                }}
+                columns={columns}
+                rows={rows}
+                rowHeight={125}
+                onPaginationModelChange={handlePageChange}
+            />
         </ThemeProvider>
     )
 }

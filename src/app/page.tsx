@@ -60,12 +60,12 @@ export default function Home() {
                             {" "}
                             Quick Start: Link Hub{" "}
                         </LargeHeading>
-                        <div className="flex flex-row h-auto gap-6">
+                        <div className="flex flex-col h-auto gap-6 sm:flex-row"> 
                             <Link href="/recommendations">
                                 <Button
                                     className={cn(
                                         buttonVariants({ variant: "subtle" }),
-                                        "h-72 w-64 text-3xl"
+                                        "sm:h-72 sm:w-64 text-3xl h-56 w-52"
                                     )}
                                 >
                                     Find New Songs
@@ -76,7 +76,7 @@ export default function Home() {
                                 <Button
                                     className={cn(
                                         buttonVariants({ variant: "subtle" }),
-                                        "h-72 w-64 text-3xl"
+                                        "sm:h-72 sm:w-64 text-3xl h-56 w-52"
                                     )}
                                 >
                                     Get Connected

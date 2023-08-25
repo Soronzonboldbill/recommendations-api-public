@@ -23,9 +23,13 @@ const page: FC = ({}) => {
                     <Icons.Heart className="text-red-500" />
                 </Paragraph>
                 <TrackResults />
-                <Button className={cn(buttonVariants({ variant: "outline" }))}>
-                    <Link href="/recommendations">Make Another Query </Link>
-                </Button>
+                <Link href="/recommendations">
+                    <Button
+                        className={cn(buttonVariants({ variant: "outline" }))}
+                    >
+                        Make Another Query{" "}
+                    </Button>
+                </Link>
             </div>
         </div>
     )
