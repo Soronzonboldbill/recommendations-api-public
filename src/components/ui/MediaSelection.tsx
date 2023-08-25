@@ -24,7 +24,6 @@ interface MediaSelectionProps {
 const MediaSelection: FC<MediaSelectionProps> = ({ results }) => {
     const handleChange = (selectedOptions: any) => {
         results(selectedOptions.value)
-        console.log(selectedOptions)
     }
 
     return (

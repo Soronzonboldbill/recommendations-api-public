@@ -85,7 +85,7 @@ const page: FC = ({}) => {
             <div className="flex flex-col gap-6 items-center">
                 <LargeHeading>Spotify Recommendations</LargeHeading>
                 <Paragraph>
-                    Craving a new musical sound? You're in the right place,
+                    Craving a new musical sound? You&quot;re in the right place,
                     search below for your specific tastes
                 </Paragraph>
                 <RecommendationsForm inputList={inputs} />

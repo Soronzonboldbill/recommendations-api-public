@@ -1,5 +1,5 @@
 "use client"
-import { FC, useEffect, useRef, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { createTheme, ThemeProvider } from "@mui/material"
 import { DataGrid, GridColDef, GridColumnHeaderParams } from "@mui/x-data-grid"
 import { useTheme } from "next-themes"
@@ -89,8 +89,6 @@ const TrackResults: FC<TrackResultsProps> = ({}) => {
         const queryData: any = JSON.parse(window.name)
         setData(queryData.queryResults.tracks)
     }, [])
-
-    console.log(data)
 
     const rows: any[] = []
 

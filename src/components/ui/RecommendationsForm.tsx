@@ -9,7 +9,6 @@ import GenreMultiSelect from "./GenreMultiSelect"
 import Slider from "@/ui/Slider"
 import { toast } from "@/ui/toast"
 import { useRouter } from "next/navigation"
-import { db } from "@/lib/db"
 
 interface RecommendationsFormProps {
     inputList: any[]
@@ -82,7 +81,6 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
                 message: "Please Try Again Later.",
                 type: "error",
             })
-            console.log((error as Error).message)
             sliderVals.length = 0
         }
     }
@@ -96,7 +94,7 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
             {inputList.map((item, index) => {
                 if (item.type === "text") {
                     return (
-                        <div className="flex flex-col gap-2 items-start w-full">
+                        <div className="flex flex-col gap-2 items-start w-full" key="input-wrapper">
                             <label
                                 htmlFor={item.id}
                                 className="text-slate-900 dark:text-slate-50"
@@ -116,15 +114,16 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
                 }
                 if (item.type === "combo") {
                     return (
-                        <GenreMultiSelect
+                        <GenreMultiSelect 
                             results={setGenreResults}
                             contentList={item.contentList}
+                            key="genre-select"
                         />
                     )
                 }
                 if (item.type === "slider") {
                     return (
-                        <div className="w-full mb-1">
+                        <div className="w-full mb-1" key={item.id}>
                             <label className="text-slate-900 dark:text-slate-50 flex flex-col">
                                 {item.label}
                             </label>

@@ -34,7 +34,6 @@ const querySpotify = async (
 
         return resultsFromQuery.data
     } catch (error) {
-        console.log(error)
         throw new Error("Could Not Query Spotify")
     }
 }
@@ -43,8 +42,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const genreList = req.body.genreList
     const sliderList = req.body.sliders
     const apiKey = req.body.Authorization
-
-    console.log()
 
     if (!apiKey) {
         return res.status(401).json({ error: "No API KEY" })
@@ -92,7 +89,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             .status(validResponse)
             .json({ spotifyToken: spotifyToken, queryResults: results })
     } catch (error: any) {
-        console.log(error)
         return res
             .status(internalError)
             .json({ error: (error as Error).message })

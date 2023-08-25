@@ -1,14 +1,14 @@
 "use client"
 
-import { nodejs, python } from "@/helpers/documentation-code"
+import { nodejs } from "@/helpers/documentation-code"
+import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/ui/Button"
+import Code from "@/ui/Code"
+import Paragraph from "@/ui/Paragraph"
+import { Tabs, TabsContent } from "@/ui/Tabs"
+import Link from "next/link"
 import { FC } from "react"
 import SimpleBar from "simplebar-react"
-import Code from "@/ui/Code"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/Tabs"
-import Paragraph from "@/ui/Paragraph"
-import Link from "next/link"
-import { Button, buttonVariants } from "@/ui/Button"
-import { cn } from "@/lib/utils"
 
 const DocumentationTabs: FC = () => {
     return (
@@ -34,7 +34,7 @@ const DocumentationTabs: FC = () => {
                     For sliders, format your search terms into the object
                     template:{" "} <br />
                     <code className="text-sm">
-                        &#123;label: "yourSearchTerm", value: number (between 0
+                        &#123;label: &quot;yourSearchTerm&quot;, value: number (between 0
                         and 1)&#125;
                     </code> <br />
                     {" "}and put them into the array as needed
@@ -49,7 +49,7 @@ const DocumentationTabs: FC = () => {
                         </Link>
                     </Button>{" "}
                     and scroll past seed tracks. This API only uses
-                    target_searchTerm to make it's queries
+                    target_searchTerm to make it&apos;s queries
                 </Paragraph>
             </div>
         </Tabs>

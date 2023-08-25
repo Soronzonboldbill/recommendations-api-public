@@ -12,14 +12,14 @@ const page = () => {
             <div className="flex flex-col gap-6 items-center">
                 <LargeHeading>
                     {" "}
-                    We're Sorry, This Page Is Unavailable
+                    We&apos;re Sorry, This Page Is Unavailable
                 </LargeHeading>
                 <Paragraph className="text-lg">
-                    But rest assured, we're working very hard to get this page
+                    But rest assured, we&apos;re working very hard to get this page
                     up in the near future. Until then, why not expand upon your
                     music tastes with a simple search?
                 </Paragraph>
-                <Link href="/search">
+                <Link href="/recommendations">
                     <Button
                         className={cn(
                             buttonVariants({ variant: "outline" }),
