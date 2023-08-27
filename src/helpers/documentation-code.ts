@@ -2,7 +2,7 @@ export const nodejs = `const axios = require("axios");
 
 const options = {
     method: 'POST',
-    url: 'http://localhost:3000/api/v1/querySpotify',
+    url: 'https://recommendations-spotify-api.vercel.app/api/v1/querySpotify',
 
     // max 5 genres
     genreList: ["hip-hop",],

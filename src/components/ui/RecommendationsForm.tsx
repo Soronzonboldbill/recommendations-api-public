@@ -53,12 +53,11 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
 
         setSubmittingForm(!submittingForm)
 
-        // todo: update this later in production
-        const url = "http://localhost:3000/api/v1/querySpotify"
+        const url = "https://recommendations-spotify-api.vercel.app/api/v1/querySpotify"
 
         try {
             const apiKey = await axios.request({
-                url: "http://localhost:3000/api/v1/getRecommendationAuth",
+                url: "https://recommendations-spotify-api.vercel.app/api/v1/getRecommendationAuth",
             })
 
             const results = await axios.post(url, {
