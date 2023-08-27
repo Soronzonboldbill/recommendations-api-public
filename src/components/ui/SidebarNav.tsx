@@ -83,7 +83,7 @@ const SidebarNav: FC = () => {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>
                             <Link href="https://github.com/Soronzonboldbill/">
-                                My Github
+                                Project Github
                             </Link>
                         </DropdownMenuItem>
                     </DropdownMenuGroup>

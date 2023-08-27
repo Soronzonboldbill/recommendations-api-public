@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/ThemeToggle"
 import { buttonVariants } from "@/ui/Button"
 import SignInButton from "@/ui/SignInButton"
 import SignOutButton from "@/ui/SignOutButton"
-import SpotifyLogo from "@/ui/SpotifyLogo"
+import MusicLogo from "@/components/ui/MusicLogo"
 import SidebarNav from "@/ui/SidebarNav"
 
 const Navbar = async () => {
@@ -16,7 +16,7 @@ const Navbar = async () => {
             <div className="container max-w-7xl mx-auto w-full flex justify-between items-center">
                 <Link href="/" className={buttonVariants({ variant: "link" })}>
                     <div className="flex flex-row gap-2 items-center">
-                        <SpotifyLogo height="2rem" width="2rem" />
+                        <MusicLogo height="2rem" width="2rem" />
                         Recommendations API
                     </div>
                 </Link>
@@ -39,6 +39,12 @@ const Navbar = async () => {
                         className={buttonVariants({ variant: "ghost" })}
                     >
                         Recommendations
+                    </Link>
+                    <Link
+                        href="/#" // todo: update in production 
+                        className={buttonVariants({ variant: "ghost" })}
+                    >
+                        Project Github
                     </Link>
                     {session ? (
                         <>

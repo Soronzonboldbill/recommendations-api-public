@@ -74,6 +74,7 @@ const Table: FC<TableProps> = ({ userRequests }) => {
                     backgroundColor:
                         applicationTheme === "light" ? "white" : "#152238",
                     fontSize: "1rem",
+                    width: "100%",
                 }}
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick

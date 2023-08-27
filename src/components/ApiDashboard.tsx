@@ -35,7 +35,7 @@ const ApiDashboard = async ({}) => {
   }))
 
   return (
-    <div className='container flex flex-col gap-6'>
+    <div className='container flex flex-col gap-6 items-center'>
       <LargeHeading>Welcome back, {user.user.name}</LargeHeading>
       <div className='flex flex-col md:flex-row gap-4 justify-center md:justify-start items-center'>
         <Paragraph>Your API key:</Paragraph>

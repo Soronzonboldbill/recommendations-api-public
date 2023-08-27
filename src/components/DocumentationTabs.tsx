@@ -18,7 +18,11 @@ const DocumentationTabs: FC = () => {
                     <Code code={nodejs} language="javascript" show />
                 </SimpleBar>
             </TabsContent>
-            <div className="p-10 flex flex-col gap-6 max-w-4xl">
+            <div className="p-10 flex flex-col gap-6">
+                <Paragraph>
+                    <strong>Note:</strong> The API is rate limited to 25
+                    requests per hour
+                </Paragraph>
                 <Paragraph className="text-start">
                     To see all available genres, refer to:{" "}
                     <Button
@@ -32,12 +36,12 @@ const DocumentationTabs: FC = () => {
                 </Paragraph>
                 <Paragraph className="text-start">
                     For sliders, format your search terms into the object
-                    template:{" "} <br />
+                    template: <br />
                     <code className="text-sm">
-                        &#123;label: &quot;yourSearchTerm&quot;, value: number (between 0
-                        and 1)&#125;
-                    </code> <br />
-                    {" "}and put them into the array as needed
+                        &#123;label: &quot;yourSearchTerm&quot;, value: number
+                        (between 0 and 1)&#125;
+                    </code>{" "}
+                    <br /> and put them into the array as needed
                 </Paragraph>
                 <Paragraph className="text-start">
                     To see all available search terms: refer to:{" "}
