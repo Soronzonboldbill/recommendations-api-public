@@ -55,16 +55,16 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
 
         try {
             const apiKey = await axios.request({
-                // url: "https://recommendations-spotify-api.vercel.app/api/v1/getRecommendationAuth",
+                url: "https://recommendations-spotify-api.vercel.app/api/v1/getRecommendationAuth",
                 method: "GET",
-                url: "http://localhost:3000/api/v1/getRecommendationAuth",
+                // url: "http://localhost:3000/api/v1/getRecommendationAuth",
                 headers: {
                     "content-type": "application/json",
                 },
             })
 
-            // const url = "https://recommendations-spotify-api.vercel.app/api/v1/querySpotify"
-            const url = "http://localhost:3000/api/v1/querySpotify"
+            const url = "https://recommendations-spotify-api.vercel.app/api/v1/querySpotify"
+            // const url = "http://localhost:3000/api/v1/querySpotify"
 
             const results = await axios.request({
                 method: "POST",
