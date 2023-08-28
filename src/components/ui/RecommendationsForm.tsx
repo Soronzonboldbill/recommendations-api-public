@@ -53,17 +53,30 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
 
         setSubmittingForm(!submittingForm)
 
-        const url = "https://recommendations-spotify-api.vercel.app/api/v1/querySpotify"
-
         try {
             const apiKey = await axios.request({
                 url: "https://recommendations-spotify-api.vercel.app/api/v1/getRecommendationAuth",
+                method: "GET",
+                // url: "http://localhost:3000/api/v1/getRecommendationAuth",
+                headers: {
+                    "content-type": "application/json",
+                },
             })
 
-            const results = await axios.post(url, {
-                genreList: genreResults,
-                sliders: sliderVals,
-                Authorization: apiKey.data.apiKey,
+            const url = "https://recommendations-spotify-api.vercel.app/api/v1/querySpotify"
+            // const url = "http://localhost:3000/api/v1/querySpotify"
+
+            const results = await axios.request({
+                method: "POST",
+                url: url,
+                data: {
+                    genreList: genreResults,
+                    sliders: sliderVals,
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: apiKey.data.apiKey,
+                },
             })
 
             toast({
@@ -73,6 +86,7 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
             })
             sliderVals.length = 0
             window.name = JSON.stringify(results.data)
+            // window.name = (JSON.stringify({}))
             push("/recommendations/results")
         } catch (error) {
             toast({
@@ -93,7 +107,10 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
             {inputList.map((item, index) => {
                 if (item.type === "text") {
                     return (
-                        <div className="flex flex-col gap-2 items-start w-full" key="input-wrapper">
+                        <div
+                            className="flex flex-col gap-2 items-start w-full"
+                            key="input-wrapper"
+                        >
                             <label
                                 htmlFor={item.id}
                                 className="text-slate-900 dark:text-slate-50"
@@ -113,7 +130,7 @@ const RecommendationsForm: FC<RecommendationsFormProps> = ({ inputList }) => {
                 }
                 if (item.type === "combo") {
                     return (
-                        <GenreMultiSelect 
+                        <GenreMultiSelect
                             results={setGenreResults}
                             contentList={item.contentList}
                             key="genre-select"

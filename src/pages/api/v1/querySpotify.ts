@@ -41,7 +41,9 @@ const querySpotify = async (
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const genreList = req.body.genreList
     const sliderList = req.body.sliders
-    const apiKey = req.body.Authorization
+    const apiKey = req.headers["authorization"]
+
+    // console.log(req.headers["authorization"])
 
     if (!apiKey) {
         return res.status(401).json({ error: "No API KEY" })
