@@ -32,6 +32,10 @@ const nextConfig = {
             key: 'X-DNS-Prefetch-Control',
             value: 'off',
           },
+          {
+            key: "Access-Control-Allow-Origin", 
+            value: "true"
+          }
         ],
       },
     ]
