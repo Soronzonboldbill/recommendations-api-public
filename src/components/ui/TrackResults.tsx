@@ -86,9 +86,8 @@ interface TrackResultsProps {}
 const TrackResults: FC<TrackResultsProps> = ({}) => {
     const [data, setData] = useState({} as any)
     useEffect(() => {
-        const queryData: any = JSON.parse(window.name)
-        // console.log(queryData);
-        setData(queryData.queryResults.tracks)
+        const queryData = JSON.parse(localStorage.getItem('data') as string) as any
+        if (queryData) setData(queryData.queryResults.tracks)
     }, [])
 
     const rows: any[] = []
