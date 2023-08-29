@@ -2,14 +2,15 @@ export const nodejs = `const axios = require("axios");
 
 const options = {
     method: 'POST',
-    url: 'https://recommendations-spotify-api.vercel.app/api/v1/querySpotify',
-
-    // max 5 genres
-    genreList: ["hip-hop",],
-    
-    // value is between 0 and 1 inclusive and label is lowercase
-    sliders: [{ label: "energy", value: 0.5 }], 
-    Authorization: 'YOUR API KEY',
+    url: "https://recommendations-spotify-api.vercel.app/api/v1/querySpotify", 
+    data: {
+        genreList: ["hip hop"],
+        sliders: [{ label: "energy", value: 0.5 }],
+    },
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": 'UIyVKEO4YJyBiuxkKqGrO8_-q5riEjqq',
+    }
 };
 
 axios.request(options).then(function (response) {
