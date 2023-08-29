@@ -9,7 +9,7 @@ const options = {
     },
     headers: {
         "Content-Type": "application/json",
-        "Authorization": 'UIyVKEO4YJyBiuxkKqGrO8_-q5riEjqq',
+        "Authorization": 'YOUR API KEY',
     }
 };
 
