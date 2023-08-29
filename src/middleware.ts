@@ -4,29 +4,29 @@ import { NextResponse } from "next/server"
 import { Ratelimit } from "@upstash/ratelimit"
 import { Redis } from "@upstash/redis"
 
-// const redis = Redis.fromEnv()
+const redis = Redis.fromEnv()
 
-// const ratelimit = new Ratelimit({
-//     redis: redis,
-//     limiter: Ratelimit.slidingWindow(25, "1 h"),
-// })
+const ratelimit = new Ratelimit({
+    redis: redis,
+    limiter: Ratelimit.slidingWindow(25, "1 h"),
+})
 
 export default withAuth(
     async function middleware(req) {
         const pathname = req.nextUrl.pathname // relative path
 
         // Manage rate limiting
-        // if (pathname.startsWith("/api")) {
-        //     const ip = req.ip ?? "127.0.0.1"
-        //     try {
-        //         const { success } = await ratelimit.limit(ip)
+        if (pathname.startsWith("/api")) {
+            const ip = req.ip ?? "127.0.0.1"
+            try {
+                const { success } = await ratelimit.limit(ip)
 
-        //         if (!success) return NextResponse.json({ error: 'Too Many Requests' })
-        //         return NextResponse.next()
-        //     } catch (error) {
-        //         return NextResponse.json({ error: "Internal Server Error" })
-        //     }
-        // }
+                if (!success) return NextResponse.json({ error: 'Too Many Requests' })
+                return NextResponse.next()
+            } catch (error) {
+                return NextResponse.json({ error: "Internal Server Error" })
+            }
+        }
 
         // Manage route protection
         const token = await getToken({ req })
@@ -49,6 +49,7 @@ export default withAuth(
         ) {
             return NextResponse.redirect(new URL("/login", req.url))
         }
+
     },
     {
         callbacks: {

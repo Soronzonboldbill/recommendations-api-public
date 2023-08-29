@@ -81,9 +81,7 @@ const columns = columnsTemplate.map((column) => {
     }
 })
 
-interface TrackResultsProps {}
-
-const TrackResults: FC<TrackResultsProps> = ({}) => {
+const TrackResults: FC = ({}) => {
     const [data, setData] = useState({} as any)
     useEffect(() => {
         const queryData = JSON.parse(localStorage.getItem('data') as string) as any
