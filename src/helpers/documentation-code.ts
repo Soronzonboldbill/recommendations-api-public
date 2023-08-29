@@ -4,8 +4,8 @@ const options = {
     method: 'POST',
     url: "https://recommendations-spotify-api.vercel.app/api/v1/querySpotify", 
     data: {
-        genreList: ["hip hop"],
-        sliders: [{ label: "energy", value: 0.5 }],
+        genreList: ["hip hop"]
+        sliders: [{ label: "energy", value: 0.5 }]
     },
     headers: {
         "Content-Type": "application/json",
